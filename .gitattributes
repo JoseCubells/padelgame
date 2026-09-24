@@ -2,7 +2,10 @@
 # padelgame .gitattributes
 # Section 1: reference Unity template, copied verbatim from
 #   https://github.com/gitattributes/gitattributes/blob/master/Unity.gitattributes
-#   (fetched 2026-09-24). Rationale: docs/research/TOOLS_RESEARCH.md §4 and
+#   (fetched 2026-09-24). Section 1 is MIT licensed:
+#   Copyright (c) 2015-2026 Alexander Karatarakis. Permission notice:
+#   full MIT text in THIRD_PARTY_NOTICES.md
+#   Rationale: docs/research/TOOLS_RESEARCH.md §4 and
 #   docs/research/RESEARCH_REPORT.md (VERSION CONTROL).
 # Section 2: project additions (pixel-art sources, locking of unmergeable sources).
 # =====================================================================
