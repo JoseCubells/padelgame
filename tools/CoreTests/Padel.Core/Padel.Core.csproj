@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Compiles Assets/_Project/Scripts/Core outside Unity (mirror of Padel.Core.asmdef). -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Padel.Core</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(ScriptsRoot)Core/**/*.cs" />
+  </ItemGroup>
+</Project>

@@ -143,3 +143,8 @@ ArtSource/**/renders_tmp/
 # Plain .NET test harness build output (pure C# core tests outside Unity)
 **/bin/
 **/obj/
+
+# The Unity template ignores *.csproj/*.sln (IDE-generated). The .NET test harness
+# for the engine-free core is hand-written and must be versioned (ADR-011, CI level 1).
+!/tools/CoreTests/*.sln
+!/tools/CoreTests/**/*.csproj

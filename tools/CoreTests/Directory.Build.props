@@ -1,0 +1,14 @@
+<Project>
+  <!-- Mirrors Unity 6.3 compiler settings: C# 9.0 (UnityCsReference 6000.3.24f1,
+       CompilationPipeline.cs) and .NET Standard 2.1 API surface for engine-free layers. -->
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <ProjectRoot>$(MSBuildThisFileDirectory)../../</ProjectRoot>
+    <ScriptsRoot>$(ProjectRoot)Assets/_Project/Scripts/</ScriptsRoot>
+    <TestsRoot>$(ProjectRoot)Assets/_Project/Tests/EditMode/</TestsRoot>
+  </PropertyGroup>
+</Project>
