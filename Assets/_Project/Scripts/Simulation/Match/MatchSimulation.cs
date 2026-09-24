@@ -20,6 +20,8 @@ namespace Padel.Simulation.Match
         public const float MinContactHeight = 0.1f;
         public const float MaxContactHeight = 3.3f;
         private const float PredictionHorizon = 1.5f;
+        /// <summary>Extra reach allowed on late swings (m) [P].</summary>
+        public const float LateReachBonus = 0.25f;
 
         private readonly MatchConfig _config;
         private readonly TrajectoryPredictor _predictor = new TrajectoryPredictor();
@@ -90,7 +92,7 @@ namespace Padel.Simulation.Match
 
             if ((s.Phase == PointPhase.Rally || s.Phase == PointPhase.ServeToss) && s.PhaseTime > _config.RallyTimeout)
             {
-                HandleCall(s, new RefereeCall { Kind = CallKind.Let }, events);
+                HandleCall(s, new RefereeCall { Kind = CallKind.Let, Reason = PointReason.RallyTimeout }, events);
             }
         }
 
@@ -120,23 +122,36 @@ namespace Padel.Simulation.Match
             long ideal = PredictIdealContactTick(s, p, out float idealHeight, out bool bounceFirst);
             if (ideal < 0) return; // the ball will not come near this player: ignore the press
 
-            var context = new ShotContext
-            {
-                Intent = cmd.Pressed, Touch = cmd.Touch, Bounced = bounceFirst || s.BouncedSinceHit,
-                ContactHeight = idealHeight, Charge = cmd.Held ? 1f : 0f,
-            };
-            ShotDefinition provisional = _config.Shots.Get(ShotResolver.Resolve(context));
+            ShotDefinition provisional = ProvisionalShot(s, cmd, idealHeight, bounceFirst);
             long windupTicks = Ticks(provisional.WindupTime);
-            long bufferTicks = Ticks(_config.StrokeBuffer);
-            long contact = Math.Max(s.Tick + windupTicks, ideal - bufferTicks);
+            long swingReady = s.Tick + windupTicks;
+            // Early presses (up to MaxEarlyPress) hold the swing until the ball arrives and are graded early;
+            // late presses swing late and may miss (ADR-007 input buffer / charge).
+            if (ideal - swingReady > Ticks(_config.MaxEarlyPress)) return;
+            long contact = Math.Max(swingReady, ideal);
 
             s.Strokes[p] = new StrokeState
             {
                 Active = true, Intent = cmd.Pressed, Touch = cmd.Touch, Aim = cmd.Aim,
                 PressTick = s.Tick, ContactTick = contact, IdealTick = ideal,
+                TimingOffset = (swingReady - ideal) * Dt,
             };
             s.Players[p].Phase = PlayerPhase.Windup;
             s.Players[p].PhaseTime = 0f;
+        }
+
+        /// <summary>
+        /// Technique expected for a press, from the predicted contact. Its windup decides when the swing is ready.
+        /// Public so AI controllers time presses with exactly the same windup (single source of truth).
+        /// </summary>
+        public ShotDefinition ProvisionalShot(MatchState s, PlayerCommand cmd, float contactHeight, bool bouncesFirst)
+        {
+            var context = new ShotContext
+            {
+                Intent = cmd.Pressed, Touch = cmd.Touch, Bounced = bouncesFirst || s.BouncedSinceHit,
+                ContactHeight = contactHeight, Charge = cmd.Held ? 1f : 0f,
+            };
+            return _config.Shots.Get(ShotResolver.Resolve(context));
         }
 
         /// <summary>
@@ -153,7 +168,12 @@ namespace Padel.Simulation.Match
             _predictor.Predict(s.Ball, _config.Ball, _config.Court, Dt, PredictionHorizon, _samples, _predictedEvents);
             TeamId team = s.TeamOf(p);
             int half = s.HalfSign(team);
-            Vec2 pos = s.Players[p].Position;
+            // A player who presses while running keeps sliding until braked: evaluate reach where they will stop.
+            PlayerState player = s.Players[p];
+            float speed = player.Velocity.Magnitude;
+            Vec2 pos = player.Position + (speed > 1e-4f
+                ? player.Velocity * (speed / (2f * _config.Players[p].Deceleration))
+                : Vec2.Zero);
             float reach = _config.Players[p].StretchReach;
 
             int best = -1;
@@ -225,7 +245,9 @@ namespace Padel.Simulation.Match
             if (b.Y < MinContactHeight || b.Y > MaxContactHeight) return false;
             if (s.TeamAtHalf(b.Z) != s.TeamOf(p)) return false;
             float d = (new Vec2(b.X, b.Z) - s.Players[p].Position).Magnitude;
-            return d <= _config.Players[p].StretchReach;
+            // A slightly late swing still meets the ball behind the body (graded late) [P].
+            float lateBonus = s.Strokes[p].TimingOffset > 0f ? LateReachBonus : 0f;
+            return d <= _config.Players[p].StretchReach + lateBonus;
         }
 
         private void ExecuteStroke(MatchState s, int p, List<MatchEvent> events)
@@ -251,7 +273,7 @@ namespace Padel.Simulation.Match
 
             ShotQuality quality = stroke.IsServe
                 ? ShotQuality.Good
-                : ShotTiming.Evaluate((s.Tick - stroke.IdealTick) * Dt, shot);
+                : ShotTiming.Evaluate(stroke.TimingOffset, shot);
 
             Vec2 target = stroke.IsServe ? ServeTarget(s, stroke.Aim, shot) : RallyTarget(stroke.Aim, shot, opponentHalf);
             Vec2 contactXZ = new Vec2(ball.X, ball.Z);
@@ -261,6 +283,8 @@ namespace Padel.Simulation.Match
             ShotSolution solution = _solver.Solve(shot, ball, target, context.Charge);
             s.Ball = solution.Launch;
             s.LastHitter = p;
+            s.LastShot = type;
+            s.LastStrokeTick = s.Tick;
             s.BouncedSinceHit = false;
             s.OffWallSinceBounce = false;
 
@@ -455,6 +479,7 @@ namespace Padel.Simulation.Match
             s.Ball = new BallState(new Vec3(hand.X, _config.ServeTossHeight, hand.Y), Vec3.Zero, Vec3.Zero);
             s.BallLive = false;
             s.LastHitter = -1;
+            s.LastStrokeTick = -1;
             s.BouncedSinceHit = false;
             s.OffWallSinceBounce = false;
             s.TossBounced = false;

@@ -27,6 +27,9 @@ namespace Padel.Simulation.Match
         public float PhaseTime;
         public RefereeCall LastCall;
         public int LastHitter = -1;
+        /// <summary>Technique of the last stroke and the tick it was struck (-1 before the first stroke of a point).</summary>
+        public Padel.Simulation.Shots.ShotType LastShot;
+        public long LastStrokeTick = -1;
         /// <summary>The ball bounced on the floor of the team that must hit next, since the last stroke.</summary>
         public bool BouncedSinceHit;
         /// <summary>After that bounce the ball came off a wall of the same half.</summary>

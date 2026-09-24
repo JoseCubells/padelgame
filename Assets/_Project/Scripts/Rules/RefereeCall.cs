@@ -31,6 +31,8 @@ namespace Padel.Rules
         DidNotCrossNet,
         HitOwnMesh,
         DoubleHit,
+        /// <summary>Rally replayed because it exceeded the safety timeout (simulation safeguard, not a FIP rule).</summary>
+        RallyTimeout,
     }
 
     public struct RefereeCall

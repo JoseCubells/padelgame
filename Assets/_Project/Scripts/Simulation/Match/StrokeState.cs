@@ -22,6 +22,8 @@ namespace Padel.Simulation.Match
         public int HeldTicks;
         public bool Released;
         public bool IsServe;
+        /// <summary>Swing readiness minus ideal contact (s): negative = pressed early, positive = late.</summary>
+        public float TimingOffset;
         /// <summary>Recovery time of the executed shot (s); 0 until a shot is executed.</summary>
         public float Recovery;
     }

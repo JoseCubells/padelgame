@@ -22,7 +22,7 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - name: Test engine-free core
-        run: dotnet test tools/CoreTests/CoreTests.sln --logger "trx;LogFileName=core-tests.trx"
+        run: dotnet test tools/CoreTests/CoreTests.sln -c Release --logger "trx;LogFileName=core-tests.trx"
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v7
