@@ -1,0 +1,16 @@
+{
+    "name": "Padel.Rules",
+    "rootNamespace": "Padel.Rules",
+    "references": [
+        "Padel.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

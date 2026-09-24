@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padel.Core", "Padel.Core\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padel.Tests", "Padel.Tests\Padel.Tests.csproj", "{71F79A79-7B60-40A5-AE0E-E02F781F9531}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padel.Rules", "Padel.Rules\Padel.Rules.csproj", "{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{71F79A79-7B60-40A5-AE0E-E02F781F9531}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71F79A79-7B60-40A5-AE0E-E02F781F9531}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71F79A79-7B60-40A5-AE0E-E02F781F9531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
