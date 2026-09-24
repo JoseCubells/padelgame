@@ -21,6 +21,10 @@ Registro de decisiones importantes del proyecto. **Nunca se borra un ADR.** Si u
 | [ADR-006](ADR-006-ai.md) | ¿Qué arquitectura de IA? | Aceptado |
 | [ADR-007](ADR-007-input.md) | ¿Cómo llega el input al gameplay? | Aceptado |
 | [ADR-008](ADR-008-networking.md) | ¿Online, local o un jugador en el MVP? | Aceptado |
+| [ADR-009](ADR-009-camera.md) | ¿Qué cámara en tercera persona y con qué herramienta? | Aceptado (provisional) |
+| [ADR-010](ADR-010-content-tools.md) | ¿Qué herramientas de pixel art, 3D, audio y tipografía? | Aceptado (provisional) |
+| [ADR-011](ADR-011-version-control-ci.md) | ¿Git LFS, merge de Unity y CI? | Aceptado |
+| [ADR-012](ADR-012-mcp-cli-skills.md) | ¿Unity MCP, Unity CLI y skills? | Aceptado (MCP pendiente de prueba real) |
 
 ## Plantilla
 
