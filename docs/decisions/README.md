@@ -25,6 +25,7 @@ Registro de decisiones importantes del proyecto. **Nunca se borra un ADR.** Si u
 | [ADR-010](ADR-010-content-tools.md) | ¿Qué herramientas de pixel art, 3D, audio y tipografía? | Aceptado (provisional) |
 | [ADR-011](ADR-011-version-control-ci.md) | ¿Git LFS, merge de Unity y CI? | Aceptado |
 | [ADR-012](ADR-012-mcp-cli-skills.md) | ¿Unity MCP, Unity CLI y skills? | Aceptado (MCP pendiente de prueba real) |
+| [ADR-013](ADR-013-visual-direction.md) | ¿Qué dirección visual? | Aceptado (D1 Sobremesa + D2 nocturna) |
 
 ## Plantilla
 

@@ -24,7 +24,7 @@
 | Unity CLI | **NO instalado** | — |
 | Claude Code | Instalado | `2.1.281 (Claude Code)` |
 | Git | Instalado | `2.43.0` |
-| Git LFS | **NO instalado** (disponible por apt: `3.4.1-1ubuntu0.3`) | `git lfs` → "not a git command" |
+| Git LFS | **Instalado 3.4.1** (apt, 2026-09-24) | `git lfs version` |
 | Node / npm | Instalado | Node `v22.22.2`, npm `10.9.7` |
 | Python | Instalado | `3.11.15` |
 | Docker | Instalado | Docker Engine `29.3.1` |
@@ -35,7 +35,7 @@
 | Audacity / LMMS | No instalados | — |
 | ffmpeg / ImageMagick | No en PATH (Playwright trae un ffmpeg en `/opt/pw-browsers/ffmpeg-1011`) | — |
 | Chromium (Playwright) | Instalado | `/opt/pw-browsers/chromium` |
-| .NET SDK | **NO instalado**; apt ofrece `dotnet-sdk-8.0` `8.0.125`; `api.nuget.org` accesible (HTTP 200) | `apt-cache policy`, `curl` |
+| .NET SDK | **Instalado 8.0.131** (apt, 2026-09-24). Antes: no instalado; apt ofrece `dotnet-sdk-8.0` `8.0.125`; `api.nuget.org` accesible (HTTP 200) | `apt-cache policy`, `curl` |
 
 ## 3. Red
 
@@ -43,6 +43,7 @@ La política de red del entorno **deniega** (HTTP 403 del proxy de salida) estos
 
 - `download.unity3d.com`, `public-cdn.cloud.unity3d.com`, `unity.com`, `docs.unity3d.com`, `packages.unity.com`
 - `download.blender.org`
+- Servidores de licencias y cuentas de Unity: `license.unity3d.com`, `core.cloud.unity3d.com`, `api.unity.com` (comprobado el 2026-09-24, segunda sesión). Aunque la imagen Docker `unityci/editor` es accesible por Docker Hub, **el editor no puede activar licencia** en este entorno.
 
 `github.com` sí es accesible. La investigación web se hace mediante las herramientas de búsqueda/lectura web de Claude Code, que no dependen de este proxy.
 

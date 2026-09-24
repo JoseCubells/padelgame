@@ -14,9 +14,8 @@ Juego de pádel 2.5D: mundo, pista y pelota en 3D, personajes pixel art 2D, cám
   - Input System 1.20.x detrás de una capa de comandos.
   - IA: HFSM + Utility.
   - MVP: un jugador contra IA.
-- **Pendiente del propietario:**
-  - elegir la dirección visual (KI-011);
-  - instalar Unity y validar el MCP (ROADMAP, Fase 0-B).
+- **Dirección visual:** D1 "Sobremesa" + D2 "Luz de Mástil" como variante nocturna (ADR-013).
+- **Pendiente del propietario:** instalar Unity y validar el MCP (ROADMAP, Fase 0-B). En el contenedor la licencia no puede activarse: los hosts de licencias de Unity están bloqueados.
 
 ## Reglas no negociables (resumen del brief)
 

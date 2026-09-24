@@ -14,7 +14,7 @@ Registro de problemas, bloqueos y placeholders abiertos. Cada entrada tiene un I
 | KI-008 | 2026-09-24 | Herramientas | La lectura de consola del MCP oficial no está verificada | Medio | Procedimiento de ADR-012 | Abierto |
 | KI-009 | 2026-09-24 | VCS | El push de objetos LFS a través del proxy del contenedor no está probado (aún no hay binarios) | Bajo | Validarlo con el primer asset binario | Abierto |
 | KI-010 | 2026-09-24 | Licencia | Precio del exceso de LFS contradictorio entre fuentes; términos de uso de Unity Personal en CI sin verificar | Bajo | El propietario revisa su configuración de billing y los términos de Unity | Abierto |
-| KI-011 | 2026-09-24 | Arte | Dirección visual sin elegir | Bloquea el arte definitivo | Decisión del propietario | Abierto |
+| KI-011 | 2026-09-24 | Arte | Dirección visual sin elegir | Bloquea el arte definitivo | Decisión del propietario | **Cerrado 2026-09-24** (ADR-013) |
 
 ## Placeholders activos (REPLACE BEFORE ART LOCK)
 
