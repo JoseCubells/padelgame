@@ -9,7 +9,7 @@
 | Fase | Nombre | Estado |
 |---|---|---|
 | 0 | Research + Setup | Research ✅ completado · Setup ⏳ bloqueado por entorno (0-B) |
-| 1 | Technical Prototype | Pendiente. **1-A (núcleo C#) puede empezar ya** |
+| 1 | Technical Prototype | **1-A ✅ completado** (núcleo C#, 127 tests, CI verde) · 1-B ⏳ requiere Unity |
 | 2 | Visual Prototype | Pendiente (requiere Unity y la dirección visual) |
 | 3 | 1v1 Vertical Slice | Pendiente |
 | 4 | 2v2 | Pendiente |
@@ -53,7 +53,7 @@
 
 ## Fase 1 — Technical Prototype
 
-**1-A Núcleo C#, sin Unity: se puede hacer en el contenedor.**
+**1-A Núcleo C#, sin Unity: ✅ completado el 2026-09-24** (ver CHANGELOG). Incluye además `MatchSimulation` y la IA básica (`Padel.AI`), que se adelantaron desde las Fases 3 y 5 porque son C# puro y testeable.
 
 1. `tools/CoreTests` (.NET 8 + NUnit) y el esqueleto de los ensamblados `Padel.Core` / `Padel.Rules` / `Padel.Simulation`, con los `.asmdef` preparados para Unity.
 2. `Padel.Rules`: sistemas de puntuación (CLASSIC, GOLDEN, STAR, CUSTOM), sets, tie-break, orden de saque y cambio de lado, **con tests**.

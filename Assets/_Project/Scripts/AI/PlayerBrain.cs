@@ -141,35 +141,35 @@ namespace Padel.AI
             ShotIntent[] intents = { ShotIntent.Attack, ShotIntent.Control, ShotIntent.Lob };
             float[] aimsX = { -0.75f, 0f, 0.75f };
             for (int i = 0; i < 3; i++)
-            for (int a = 0; a < 3; a++)
-            {
-                ShotIntent intent = intents[i];
-                float targetX = aimsX[a] * (_sim.Config.Court.Config.HalfWidth - 1.2f);
-                float safety, pressure, position;
-                switch (intent)
+                for (int a = 0; a < 3; a++)
                 {
-                    case ShotIntent.Attack:
-                        safety = overhead ? (myDepth < 4f ? 0.5f : 0.1f) : (bounced ? 0.6f : 0.7f);
-                        pressure = overhead ? 1f : (opponentsAtNet ? 0.5f : 0.7f);
-                        position = 0.3f;
-                        break;
-                    case ShotIntent.Control:
-                        safety = overhead ? 0.9f : 0.8f;
-                        pressure = 0.4f;
-                        position = overhead ? 0.7f : 0.4f;
-                        break;
-                    default:
-                        safety = overhead ? 0.3f : 0.7f;
-                        pressure = opponentsAtNet ? 0.8f : 0.1f;
-                        position = opponentsAtNet ? 1f : 0.2f;
-                        break;
+                    ShotIntent intent = intents[i];
+                    float targetX = aimsX[a] * (_sim.Config.Court.Config.HalfWidth - 1.2f);
+                    float safety, pressure, position;
+                    switch (intent)
+                    {
+                        case ShotIntent.Attack:
+                            safety = overhead ? (myDepth < 4f ? 0.5f : 0.1f) : (bounced ? 0.6f : 0.7f);
+                            pressure = overhead ? 1f : (opponentsAtNet ? 0.5f : 0.7f);
+                            position = 0.3f;
+                            break;
+                        case ShotIntent.Control:
+                            safety = overhead ? 0.9f : 0.8f;
+                            pressure = 0.4f;
+                            position = overhead ? 0.7f : 0.4f;
+                            break;
+                        default:
+                            safety = overhead ? 0.3f : 0.7f;
+                            pressure = opponentsAtNet ? 0.8f : 0.1f;
+                            position = opponentsAtNet ? 1f : 0.2f;
+                            break;
+                    }
+                    // Hitting away from the opponents adds pressure; the centre is safer.
+                    float away = Math.Abs(targetX - oppX) / 8f;
+                    pressure += 0.4f * away;
+                    safety -= a == 1 ? 0f : 0.1f;
+                    utilities[i * 3 + a] = _profile.SafetyWeight * safety + _profile.PressureWeight * pressure + _profile.PositionWeight * position;
                 }
-                // Hitting away from the opponents adds pressure; the centre is safer.
-                float away = Math.Abs(targetX - oppX) / 8f;
-                pressure += 0.4f * away;
-                safety -= a == 1 ? 0f : 0.1f;
-                utilities[i * 3 + a] = _profile.SafetyWeight * safety + _profile.PressureWeight * pressure + _profile.PositionWeight * position;
-            }
 
             int choice = Softmax(utilities, _profile.Temperature);
             ShotIntent chosen = intents[choice / 3];

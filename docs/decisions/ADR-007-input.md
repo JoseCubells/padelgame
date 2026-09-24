@@ -93,3 +93,7 @@ El adaptador es la única pieza que conoce Input System. Cambiar de sistema de i
 ## Historial
 
 - 2026-09-24: creado.
+- 2026-09-24: **ajuste del buffer, por evidencia de los partidos IA contra IA**. El diseño inicial ("una pulsación viva 120 ms") adelantaba el contacto antes de que llegara la pelota y producía golpes al aire. Semántica actual:
+  - una pulsación hasta 0,4 s temprana (`MaxEarlyPress`) mantiene el swing hasta el contacto ideal y se califica según su adelanto (early, good o perfect);
+  - una pulsación tardía golpea tarde, con 0,25 m de alcance extra [P], o falla;
+  - el windup lo decide la simulación (`ProvisionalShot`), que es la única fuente de verdad también para la IA.

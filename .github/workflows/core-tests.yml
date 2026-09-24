@@ -21,6 +21,8 @@ jobs:
       - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '8.0.x'
+      - name: Check formatting
+        run: dotnet format tools/CoreTests/CoreTests.sln --verify-no-changes
       - name: Test engine-free core
         run: dotnet test tools/CoreTests/CoreTests.sln -c Release --logger "trx;LogFileName=core-tests.trx"
       - name: Upload test results

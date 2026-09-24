@@ -177,7 +177,30 @@ Ver `docs/qa/TEST_PLAN.md`. Resumen:
 - **Play Mode** para la integración: el MatchRunner avanza, las vistas siguen al estado, las capturas de validación visual.
 - **Determinismo:** hash de `MatchState` tras N ticks con semilla y comandos fijos.
 
-## 9. Evolución prevista
+## 9. Estado de implementación (Fase 1-A, 2026-09-24)
+
+Implementado y testeado fuera de Unity (`tools/CoreTests`, 127 tests):
+
+| Ensamblado | Tipos principales |
+|---|---|
+| Padel.Core | `Vec2`, `Vec3`, `Pcg32`, `TeamId` |
+| Padel.Rules | `ScoringConfig`, `MatchSetup`, `ScoreState`, `ScoreKeeper`, `RallyEvent`, `PointReferee`, `RefereeCall` |
+| Padel.Simulation | `CourtConfig`/`CourtGeometry`/`CourtValidator`; `BallConfig`/`BallSimulator`/`TrajectoryPredictor`; `PlayerCommand`/`ICommandSource`/`PlayerMovement`; `ShotDefinition`/`ShotCatalog`/`ShotResolver`/`ShotTiming`/`ShotSolver`; `MatchConfig`/`MatchState`/`MatchSimulation` |
+| Padel.AI | `AIProfile`, `TeamBrain`, `PlayerBrain`, `HeadlessMatch` |
+
+Decisiones de detalle tomadas al implementar:
+
+- **Traducción física → reglas.** `MatchSimulation` convierte los `BallEvent` (coordenadas, superficies) en `RallyEvent` (equipos, mitades, "en el cuadro"). `Padel.Rules` nunca ve coordenadas ni física, y el árbitro se testea con secuencias de eventos escritas a mano.
+- **`ICommandSource`** vive en `Padel.Simulation.Players` junto a `PlayerCommand` (ADR-007).
+- **Estado fuera de `MatchState`:**
+  - los buffers de predicción y del solver (scratch, sin semántica);
+  - el RNG de la IA (ver ADR-006).
+
+  Todo lo que afecta a la simulación está en `MatchState`.
+- **Una sola fuente de verdad para el timing:** `MatchSimulation.PredictIdealContactTick` y `ProvisionalShot` los usan tanto la simulación como la IA.
+- `MatchSimulation` es una instancia sin estado de partido, que solo guarda configuración y scratch. Todo el estado mutable está en `MatchState`, que ofrece `Clone()` y `ComputeHash()`.
+
+## 10. Evolución prevista
 
 - Si llega el online: `NetworkCommandSource` + transporte (ADR-008). El núcleo no cambia.
 - Si el tamaño lo exige, `Padel.Simulation` puede partirse en más ensamblados sin cambiar las dependencias hacia arriba.

@@ -104,16 +104,16 @@ namespace Padel.Simulation.Tests
             ShotDefinition shot = Catalog.Get(type);
             int cases = 0;
             foreach (float cx in new[] { -3f, 0f, 3f })
-            foreach (float cz in new[] { -8.5f, -5f, -2.5f })
-            foreach (float tx in new[] { -3.5f, 0f, 3.5f })
-            {
-                float height = type == ShotType.Bandeja ? 2.4f : 0.9f;
-                float depth = 0.5f * (shot.TargetDepthMin + shot.TargetDepthMax);
-                ShotSolution s = solver.Solve(shot, new Vec3(cx, height, cz), new Vec2(tx, depth));
-                Assert.That(s.Valid, Is.True, $"{type} from ({cx},{cz}) to ({tx},{depth}) first contact {s.FirstContactSurface} at {s.FirstContact}");
-                Assert.That(s.Error, Is.LessThan(0.05f), $"{type} from ({cx},{cz}) to ({tx},{depth})");
-                cases++;
-            }
+                foreach (float cz in new[] { -8.5f, -5f, -2.5f })
+                    foreach (float tx in new[] { -3.5f, 0f, 3.5f })
+                    {
+                        float height = type == ShotType.Bandeja ? 2.4f : 0.9f;
+                        float depth = 0.5f * (shot.TargetDepthMin + shot.TargetDepthMax);
+                        ShotSolution s = solver.Solve(shot, new Vec3(cx, height, cz), new Vec2(tx, depth));
+                        Assert.That(s.Valid, Is.True, $"{type} from ({cx},{cz}) to ({tx},{depth}) first contact {s.FirstContactSurface} at {s.FirstContact}");
+                        Assert.That(s.Error, Is.LessThan(0.05f), $"{type} from ({cx},{cz}) to ({tx},{depth})");
+                        cases++;
+                    }
             Assert.That(cases, Is.EqualTo(27));
         }
 

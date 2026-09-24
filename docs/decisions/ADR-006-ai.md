@@ -93,3 +93,7 @@ Sin licencias. Implementación iterativa: la IA básica 1v1 en la Fase 3 y la de
 ## Historial
 
 - 2026-09-24: creado.
+- 2026-09-24: MVP implementado (Fase 1-A).
+  - **Qué hay:** `TeamBrain` con formación, dueño de la pelota con bloqueo durante el swing y cuerda de 3,5 m; `PlayerBrain` con reacción, ruido sembrado, multiplicador de presión y Utility + softmax.
+  - **Nota de arquitectura:** el RNG de cada cerebro vive en el propio cerebro, sembrado por jugador, y no en `MatchState`. Los replays graban comandos, así que no dependen de él, y los partidos IA contra IA son reproducibles por semilla (hay test).
+  - **Pendiente:** balance (KI-013).

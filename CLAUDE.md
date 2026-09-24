@@ -4,7 +4,7 @@ Juego de pádel 2.5D: mundo, pista y pelota en 3D, personajes pixel art 2D, cám
 
 ## Estado actual
 
-- **Fase:** 0-A (Research) completada. **0-B (Setup de Unity) bloqueada:** hace falta la máquina del propietario (KI-001). **1-A (núcleo C#) puede empezar en el contenedor.**
+- **Fase:** 0-A (Research) ✅. **1-A (núcleo C# sin motor) ✅**: reglas, pista, pelota, jugadores, golpes, partido e IA básica, con 127 tests y CI verde. **0-B / 1-B (Unity) bloqueadas**: hace falta la máquina del propietario (KI-001). Los problemas abiertos están en `docs/qa/KNOWN_ISSUES.md` (KI-012 y KI-013).
 - **Stack** ([ADRs](docs/decisions/README.md)):
   - Unity **6.3 LTS** (6000.3.x) con URP y Universal Renderer.
   - Pelota: simulación propia determinista en C# puro.
@@ -39,8 +39,10 @@ Juego de pádel 2.5D: mundo, pista y pelota en 3D, personajes pixel art 2D, cám
 ## Comandos
 
 ```bash
-# Tests del núcleo fuera de Unity (disponible desde la Fase 1-A; requiere .NET 8: apt-get install -y dotnet-sdk-8.0)
-dotnet test tools/CoreTests
+# Tests del núcleo fuera de Unity. En sesiones cloud, .NET 8 y git-lfs los instala el hook .claude/hooks/session-start.sh
+dotnet test tools/CoreTests/CoreTests.sln -c Release
+# Formato
+dotnet format tools/CoreTests/CoreTests.sln --verify-no-changes
 
 # Unity (solo en la máquina del propietario; ver la skill unity-cli y el ROADMAP de la Fase 0-B)
 unity --version && unity doctor
@@ -52,7 +54,8 @@ No inventar comandos de Unity: consultar `.claude/skills/unity-cli/`.
 ## Entorno cloud (limitaciones conocidas)
 
 - En este contenedor no hay Unity, GPU, Blender ni Pixelorama. La red bloquea los hosts de Unity, FIP y Blender (ENVIRONMENT_AUDIT).
-- `git-lfs` hay que instalarlo en cada sesión nueva: `apt-get install -y git-lfs && git lfs install --local`.
+- `.NET 8` y `git-lfs` los instala el SessionStart hook (`.claude/hooks/session-start.sh`, registrado en `.claude/settings.json`).
+- Los tests del núcleo deben compilar como **C# 9 / netstandard2.1** y usar solo la API clásica de NUnit 3, porque es lo que compila Unity 6.3.
 - **No se versiona `.mcp.json`** (ADR-012): el MCP de Unity se registra en scope local en la máquina del propietario.
 
 ## Git

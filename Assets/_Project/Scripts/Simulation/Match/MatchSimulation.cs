@@ -132,8 +132,13 @@ namespace Padel.Simulation.Match
 
             s.Strokes[p] = new StrokeState
             {
-                Active = true, Intent = cmd.Pressed, Touch = cmd.Touch, Aim = cmd.Aim,
-                PressTick = s.Tick, ContactTick = contact, IdealTick = ideal,
+                Active = true,
+                Intent = cmd.Pressed,
+                Touch = cmd.Touch,
+                Aim = cmd.Aim,
+                PressTick = s.Tick,
+                ContactTick = contact,
+                IdealTick = ideal,
                 TimingOffset = (swingReady - ideal) * Dt,
             };
             s.Players[p].Phase = PlayerPhase.Windup;
@@ -148,8 +153,11 @@ namespace Padel.Simulation.Match
         {
             var context = new ShotContext
             {
-                Intent = cmd.Pressed, Touch = cmd.Touch, Bounced = bouncesFirst || s.BouncedSinceHit,
-                ContactHeight = contactHeight, Charge = cmd.Held ? 1f : 0f,
+                Intent = cmd.Pressed,
+                Touch = cmd.Touch,
+                Bounced = bouncesFirst || s.BouncedSinceHit,
+                ContactHeight = contactHeight,
+                Charge = cmd.Held ? 1f : 0f,
             };
             return _config.Shots.Get(ShotResolver.Resolve(context));
         }

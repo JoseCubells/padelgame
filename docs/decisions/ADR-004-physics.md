@@ -114,3 +114,7 @@ La simulación de la bola vive detrás de `BallSimulator.Step`. Para pasar a Phy
 ## Historial
 
 - 2026-09-24: creado y aceptado.
+- 2026-09-24: implementado (Fase 1-A).
+  - Calibración FIP superada en simulación, con arrastre incluido: 1,400 m. La restitución del suelo queda en 0,772.
+  - **Cambio de detalle:** el rebote irregular de la malla se deriva del punto de impacto y no del RNG del partido, para que `TrajectoryPredictor` coincida exactamente con la simulación.
+  - `Step` ya no recibe RNG.
