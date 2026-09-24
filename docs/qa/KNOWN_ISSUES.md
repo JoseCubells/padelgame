@@ -15,6 +15,7 @@ Registro de problemas, bloqueos y placeholders abiertos. Cada entrada tiene un I
 | KI-009 | 2026-09-24 | VCS | El push de objetos LFS a través del proxy del contenedor no está probado (aún no hay binarios) | Bajo | Validarlo con el primer asset binario | Abierto |
 | KI-010 | 2026-09-24 | Licencia | Precio del exceso de LFS contradictorio entre fuentes; términos de uso de Unity Personal en CI sin verificar | Bajo | El propietario revisa su configuración de billing y los términos de Unity | Abierto |
 | KI-011 | 2026-09-24 | Arte | Dirección visual sin elegir | Bloquea el arte definitivo | Decisión del propietario | **Cerrado 2026-09-24** (ADR-013) |
+| KI-012 | 2026-09-24 | Reglas (MVP) | `PointReferee` no modela: pelota que toca a un jugador (J7/J8), jugador que toca la red (J5), juego exterior (J13), pelota enganchada en la malla (J11), ni la obligación del bote previo al saque (S3). Las puertas se tratan como malla cerrada | Medio | Añadir cuando exista colisión jugador-pelota (Fase 1-B/3) | Abierto |
 
 ## Placeholders activos (REPLACE BEFORE ART LOCK)
 
