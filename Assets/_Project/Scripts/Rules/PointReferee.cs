@@ -35,6 +35,9 @@ namespace Padel.Rules
         public bool IsPointOver => _phase == Phase.Over;
         public bool IsServing => _phase == Phase.AwaitingServeHit || _phase == Phase.ServeInFlight || _phase == Phase.ServeBounced;
 
+        /// <summary>Deep copy (all fields are values) for snapshots, prediction and replays.</summary>
+        public PointReferee Clone() => (PointReferee)MemberwiseClone();
+
         /// <summary>Starts a new point (first serve).</summary>
         public void StartPoint(TeamId server)
         {
