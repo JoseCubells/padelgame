@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Mirror of Padel.Simulation.asmdef. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Padel.Simulation</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(ScriptsRoot)Simulation/**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Padel.Core/Padel.Core.csproj" />
+    <ProjectReference Include="../Padel.Rules/Padel.Rules.csproj" />
+  </ItemGroup>
+</Project>

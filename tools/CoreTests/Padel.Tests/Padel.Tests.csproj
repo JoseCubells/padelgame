@@ -17,5 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="../Padel.Core/Padel.Core.csproj" />
     <ProjectReference Include="../Padel.Rules/Padel.Rules.csproj" />
+    <ProjectReference Include="../Padel.Simulation/Padel.Simulation.csproj" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padel.Tests", "Padel.Tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padel.Rules", "Padel.Rules\Padel.Rules.csproj", "{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padel.Simulation", "Padel.Simulation\Padel.Simulation.csproj", "{A8F44EB5-D7F8-43EF-B07A-8F99A9F78857}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5973050-9CA0-49CD-A0C0-88FC1F2E3BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F44EB5-D7F8-43EF-B07A-8F99A9F78857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F44EB5-D7F8-43EF-B07A-8F99A9F78857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F44EB5-D7F8-43EF-B07A-8F99A9F78857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F44EB5-D7F8-43EF-B07A-8F99A9F78857}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
