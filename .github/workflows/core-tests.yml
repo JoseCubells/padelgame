@@ -1,0 +1,31 @@
+# CI level 1 (ADR-011): builds and tests the engine-free core (Padel.Core, Padel.Rules,
+# Padel.Simulation, Padel.AI) with .NET, without a Unity licence. Unity EditMode/PlayMode
+# runs (CI level 2, GameCI) are not enabled until the owner approves licence use in CI.
+name: core-tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  core-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          lfs: false # code-only job; saves Git LFS bandwidth quota
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '8.0.x'
+      - name: Test engine-free core
+        run: dotnet test tools/CoreTests/CoreTests.sln --logger "trx;LogFileName=core-tests.trx"
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: core-test-results
+          path: tools/CoreTests/**/TestResults/*.trx

@@ -148,3 +148,6 @@ ArtSource/**/renders_tmp/
 # for the engine-free core is hand-written and must be versioned (ADR-011, CI level 1).
 !/tools/CoreTests/*.sln
 !/tools/CoreTests/**/*.csproj
+
+# .NET test run outputs
+**/TestResults/
